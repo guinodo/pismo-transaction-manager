@@ -9,6 +9,12 @@ spring:
     deserialization:
       fail-on-unknown-properties: false
 
+  datasource:
+    url: jdbc:postgresql://localhost:15430/pismo_transaction_manager
+    username: admin
+    password: admin@123
+    driver-class-name: org.postgresql.Driver
+
 springfox:
   documentation:
     enabled: true
