@@ -1,7 +1,6 @@
 package com.guinodo.pismo.transaction.adapters.inbound.controllers;
 
 import com.guinodo.pismo.transaction.adapters.dtos.RequestAccountDTO;
-import com.guinodo.pismo.transaction.adapters.dtos.ResposeAccountDTO;
 import com.guinodo.pismo.transaction.application.domain.Account;
 import com.guinodo.pismo.transaction.application.ports.service.AccountServicePort;
 import io.swagger.annotations.Api;

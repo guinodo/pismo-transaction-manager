@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackageClasses = Application.class)
 public class BeanConfiguration {
 
-//    @Bean
-//    TransactionServicePort transactionServicePort(TransactionRepositoryPort repository) {
-//        return new TransactionServiceImpl(repository);
-//    }
+    @Bean
+    TransactionServicePort transactionServicePort(TransactionRepositoryPort repository) {
+        return new TransactionServiceImpl(repository);
+    }
 
     @Bean
     AccountServicePort accountServicePort(AccountRepositoryPort repository) {

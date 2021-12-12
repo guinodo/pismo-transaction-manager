@@ -4,6 +4,7 @@ import com.guinodo.pismo.transaction.adapters.outbound.persistence.entity.Accoun
 import com.guinodo.pismo.transaction.adapters.outbound.persistence.exception.EntityNotFundException;
 import com.guinodo.pismo.transaction.application.domain.Account;
 import com.guinodo.pismo.transaction.application.ports.repository.AccountRepositoryPort;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Component
 @Primary
+@Slf4j
 public class AccountRepository implements AccountRepositoryPort {
 
     @Autowired
@@ -27,6 +29,9 @@ public class AccountRepository implements AccountRepositoryPort {
     @Override
     public Account save(Account account) {
         AccountEntity accountEntity = repository.save( modelMapper.map(account, AccountEntity.class) );
+
+        log.info("Account saved: { id: {} }", account.getAccountId());
+
         return modelMapper.map(accountEntity, Account.class);
     }
 
@@ -38,7 +43,8 @@ public class AccountRepository implements AccountRepositoryPort {
            return Optional.of(modelMapper.map(accountEntity.get(), Account.class));
        }
 
-        throw new EntityNotFundException(String.format("Entity not found with id: %s",id));
+        log.error("Account not found with id: {}", id);
+        throw new EntityNotFundException(String.format("Account not found with id: %s",id));
     }
 
 }

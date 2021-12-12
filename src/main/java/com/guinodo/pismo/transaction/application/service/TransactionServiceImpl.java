@@ -1,5 +1,6 @@
 package com.guinodo.pismo.transaction.application.service;
 
+import com.guinodo.pismo.transaction.application.domain.CreateTransactionDomain;
 import com.guinodo.pismo.transaction.application.domain.Transaction;
 import com.guinodo.pismo.transaction.application.ports.repository.TransactionRepositoryPort;
 import com.guinodo.pismo.transaction.application.ports.service.TransactionServicePort;
@@ -15,8 +16,9 @@ public class TransactionServiceImpl implements TransactionServicePort {
     }
 
     @Override
-    public Transaction save(Transaction transaction) {
-        return repository.save(transaction);
+    public Transaction create(CreateTransactionDomain domain) {
+//      TODO implment
+        return null;
     }
 
     @Override
