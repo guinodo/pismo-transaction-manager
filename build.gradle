@@ -5,6 +5,7 @@ buildscript {
         jUnitJupterVersion = "5.7.1"
         log4jVersion = "2.14.1"
         dom4jVersion = "2.1.3"
+        modelMapperVersion = "2.3.5"
     }
 }
 
@@ -43,6 +44,7 @@ dependencies {
     // Utils
     implementation "org.apache.commons:commons-lang3"
     implementation "org.dom4j:dom4j:${dom4jVersion}"
+    implementation "org.modelmapper:modelmapper:${modelMapperVersion}"
 
     // Lombok
     compileOnly "org.projectlombok:lombok"

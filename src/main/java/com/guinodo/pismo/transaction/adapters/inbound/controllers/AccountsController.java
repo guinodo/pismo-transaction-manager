@@ -2,8 +2,10 @@ package com.guinodo.pismo.transaction.adapters.inbound.controllers;
 
 import com.guinodo.pismo.transaction.adapters.dtos.RequestAccountDTO;
 import com.guinodo.pismo.transaction.adapters.dtos.ResposeAccountDTO;
+import com.guinodo.pismo.transaction.application.ports.service.AccountServicePort;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/accounts")
 public class AccountsController {
+
+    @Autowired
+    private AccountServicePort accountService;
 
     @ApiOperation(value="Create account")
     @PostMapping
