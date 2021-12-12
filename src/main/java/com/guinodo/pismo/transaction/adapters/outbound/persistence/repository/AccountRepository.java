@@ -1,6 +1,7 @@
 package com.guinodo.pismo.transaction.adapters.outbound.persistence.repository;
 
 import com.guinodo.pismo.transaction.adapters.outbound.persistence.entity.AccountEntity;
+import com.guinodo.pismo.transaction.adapters.outbound.persistence.exception.EntityNotFundException;
 import com.guinodo.pismo.transaction.application.domain.Account;
 import com.guinodo.pismo.transaction.application.ports.repository.AccountRepositoryPort;
 import org.modelmapper.ModelMapper;
@@ -37,7 +38,7 @@ public class AccountRepository implements AccountRepositoryPort {
            return Optional.of(modelMapper.map(accountEntity.get(), Account.class));
        }
 
-        return Optional.empty();
+        throw new EntityNotFundException(String.format("Entity not found with id: %s",id));
     }
 
 }

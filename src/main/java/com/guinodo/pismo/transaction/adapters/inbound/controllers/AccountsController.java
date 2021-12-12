@@ -32,12 +32,7 @@ public class AccountsController {
     @ApiOperation(value="Get account")
     @GetMapping("/{accountId}")
     public ResponseEntity<?> findById(@PathVariable(value="accountId") Long accountId) {
-
-        ResposeAccountDTO accountDTO = new ResposeAccountDTO();
-        accountDTO.setAccountId(1L);
-        accountDTO.setDocumentNumber("12345678900");
-
-        return ResponseEntity.status(HttpStatus.OK).body(accountDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(accountService.findById(accountId));
     }
 
 }
