@@ -5,9 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class AccountDTO {
-
-    private Long id;
+public class RequestAccountDTO {
 
     @NotBlank
     private String documentNumber;

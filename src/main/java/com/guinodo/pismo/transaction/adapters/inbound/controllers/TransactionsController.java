@@ -1,6 +1,6 @@
 package com.guinodo.pismo.transaction.adapters.inbound.controllers;
 
-import com.guinodo.pismo.transaction.adapters.dtos.TransactionDTO;
+import com.guinodo.pismo.transaction.adapters.dtos.RequestTransactionDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ public class TransactionsController {
     @ApiOperation(value="Create transaction")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody final TransactionDTO transaction) {
+    public ResponseEntity<?> create(@RequestBody final RequestTransactionDTO transaction) {
         return ResponseEntity.ok(transaction);
     }
 
