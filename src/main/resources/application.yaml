@@ -1,11 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
 spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
     deserialization:
       fail-on-unknown-properties: false
 
-server:
-  port: 8080
-
-  servlet:
-    context-path: /api
+springfox:
+  documentation:
+    enabled: true
