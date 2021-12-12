@@ -6,6 +6,7 @@ import com.guinodo.pismo.transaction.application.domain.Account;
 import com.guinodo.pismo.transaction.application.ports.service.AccountServicePort;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "Accounts")
 @RestController
 @RequestMapping("/accounts")
+@Slf4j
 public class AccountsController {
 
     @Autowired
@@ -24,6 +26,7 @@ public class AccountsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody final RequestAccountDTO requestAccount) {
+        log.info("Request create Account: { documentNumber: {} }", requestAccount.getDocumentNumber());
         Account account = new Account();
         BeanUtils.copyProperties(requestAccount, account);
         return ResponseEntity.ok(accountService.save(account));
@@ -32,6 +35,7 @@ public class AccountsController {
     @ApiOperation(value="Get account")
     @GetMapping("/{accountId}")
     public ResponseEntity<?> findById(@PathVariable(value="accountId") Long accountId) {
+        log.info("Request find Account: { accountId: {} }", accountId);
         return ResponseEntity.status(HttpStatus.OK).body(accountService.findById(accountId));
     }
 
