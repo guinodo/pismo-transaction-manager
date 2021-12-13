@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Transaction {
     private Long transactionId;
     private Account account;
+    private OperationType operationType;
     private Double amount;
     private LocalDateTime eventDate;
 
@@ -14,6 +15,14 @@ public class Transaction {
 
     public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public OperationType getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(OperationType operationType) {
+        this.operationType = operationType;
     }
 
     public Account getAccount() {

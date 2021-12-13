@@ -2,6 +2,7 @@ package com.guinodo.pismo.transaction.adapters.configuration;
 
 import com.guinodo.pismo.transaction.Application;
 import com.guinodo.pismo.transaction.application.ports.repository.AccountRepositoryPort;
+import com.guinodo.pismo.transaction.application.ports.repository.OperationTypeRepositoryPort;
 import com.guinodo.pismo.transaction.application.ports.repository.TransactionRepositoryPort;
 import com.guinodo.pismo.transaction.application.ports.service.AccountServicePort;
 import com.guinodo.pismo.transaction.application.ports.service.TransactionServicePort;
@@ -17,8 +18,11 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    TransactionServicePort transactionServicePort(TransactionRepositoryPort repository) {
-        return new TransactionServiceImpl(repository);
+    TransactionServicePort transactionServicePort(
+            TransactionRepositoryPort repository,
+            OperationTypeRepositoryPort operationTypeRepository
+    ) {
+        return new TransactionServiceImpl(repository, operationTypeRepository);
     }
 
     @Bean
