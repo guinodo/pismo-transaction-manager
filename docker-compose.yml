@@ -1,7 +1,21 @@
 version: '3'
 
 services:
-  postgres:
+  app-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:15430/pismo_transaction_manager
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin@123
+
+  db:
     image: postgres:12.1
     ports:
       - "15430:5432"
