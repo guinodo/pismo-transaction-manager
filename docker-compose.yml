@@ -1,22 +1,9 @@
 version: '3'
 
 services:
-  app-server:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    restart: always
-    depends_on:
-      - db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:15430/pismo_transaction_manager
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: admin@123
-
-  db:
+  postgres-db:
     image: postgres:12.1
+    container_name: postgres-db
     ports:
       - "15430:5432"
     healthcheck:
@@ -30,10 +17,28 @@ services:
       POSTGRES_PASSWORD: admin@123
       POSTGRES_DB: pismo_transaction_manager
     networks:
-      - postgres-compose-network
+      - spring-cloud-network
+
+  app-server:
+    image: pismo-transaction-manager
+    container_name: pismo-transaction-manager-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-cloud-network
+    restart: always
+    depends_on:
+      - postgres-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:15430/pismo_transaction_manager
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin@123
 
 networks:
-  postgres-compose-network:
+  spring-cloud-network:
     driver: bridge
 
 volumes:
