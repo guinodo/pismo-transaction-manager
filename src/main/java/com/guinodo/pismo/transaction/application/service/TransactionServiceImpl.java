@@ -4,9 +4,11 @@ import com.guinodo.pismo.transaction.application.domain.Account;
 import com.guinodo.pismo.transaction.application.domain.CreateTransactionDomain;
 import com.guinodo.pismo.transaction.application.domain.OperationType;
 import com.guinodo.pismo.transaction.application.domain.Transaction;
+import com.guinodo.pismo.transaction.application.domain.enums.OperationTypeEnum;
 import com.guinodo.pismo.transaction.application.exception.BusinessException;
 import com.guinodo.pismo.transaction.application.ports.repository.OperationTypeRepositoryPort;
 import com.guinodo.pismo.transaction.application.ports.repository.TransactionRepositoryPort;
+import com.guinodo.pismo.transaction.application.ports.service.AccountServicePort;
 import com.guinodo.pismo.transaction.application.ports.service.TransactionServicePort;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,10 +19,12 @@ import java.util.Optional;
 public class TransactionServiceImpl implements TransactionServicePort {
 
     private final TransactionRepositoryPort repository;
+    private final AccountServicePort accountServicePort;
     private final OperationTypeRepositoryPort operationTypeRepository;
 
-    public TransactionServiceImpl(TransactionRepositoryPort repository, OperationTypeRepositoryPort operationTypeRepository) {
+    public TransactionServiceImpl(TransactionRepositoryPort repository, AccountServicePort accountServicePort, OperationTypeRepositoryPort operationTypeRepository) {
         this.repository = repository;
+        this.accountServicePort = accountServicePort;
         this.operationTypeRepository = operationTypeRepository;
     }
 
@@ -31,6 +35,8 @@ public class TransactionServiceImpl implements TransactionServicePort {
             return new BusinessException(
                     String.format("Operation is invalid: { operationTypeId: %s}", domain.getOperationTypeId()));
         });
+
+        accountServicePort.updateTransaction(domain.getAccountId(), operationType, domain.getAmount());
 
         return repository.save(domainToTransaction(domain));
     }

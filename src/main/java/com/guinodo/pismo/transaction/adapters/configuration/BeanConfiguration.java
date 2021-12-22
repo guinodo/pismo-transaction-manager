@@ -20,9 +20,10 @@ public class BeanConfiguration {
     @Bean
     TransactionServicePort transactionServicePort(
             TransactionRepositoryPort repository,
-            OperationTypeRepositoryPort operationTypeRepository
+            OperationTypeRepositoryPort operationTypeRepository,
+            AccountServicePort accountServicePort
     ) {
-        return new TransactionServiceImpl(repository, operationTypeRepository);
+        return new TransactionServiceImpl(repository, accountServicePort, operationTypeRepository);
     }
 
     @Bean

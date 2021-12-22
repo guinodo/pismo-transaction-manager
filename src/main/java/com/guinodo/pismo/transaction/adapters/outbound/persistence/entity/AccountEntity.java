@@ -20,4 +20,10 @@ public class AccountEntity implements Serializable {
     @Column(name = "DOCUMENT_NUMBER")
     private String documentNumber;
 
+    @Column(name = "AMOUNT")
+    private String amount;
+
+    @Column(name = "CREDIT_LIMIT")
+    private String creditLimit;
+
 }
