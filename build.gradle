@@ -19,7 +19,6 @@ plugins {
 group 'com.guinodo'
 sourceCompatibility = "11"
 targetCompatibility = "11"
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -49,6 +48,8 @@ dependencies {
     // Lombok
     compileOnly "org.projectlombok:lombok"
     annotationProcessor "org.projectlombok:lombok"
+
+    implementation('org.flywaydb:flyway-core')
 
     // Testes
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
